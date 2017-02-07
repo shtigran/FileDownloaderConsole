@@ -30,46 +30,49 @@ namespace FileDownloader
                 using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
                 {
                     htmlCode = client.DownloadString(path);
-                    all = showMatch(htmlCode, @"([a-zA-Z0-9\-]+?)\.jpg");
+                    all = showMatch(htmlCode, @"([/_a-zA-Z0-9\-]+?)\.(jpg|svg|png)");
+                    //Console.WriteLine("\n"+ all);
                     Console.WriteLine("-------------");
-                    Console.WriteLine("\nThere are the following images: ");
-                    string[] split = all.Split(new Char[] { '"', '?' });
+                    Console.WriteLine("\nThere are the following files: ");
+                    string[] split = all.Split(new Char[] { '\n' });
                     Console.WriteLine("-------------");
+                   
                     string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                    WebClient client1;
 
-                    int flag = 1;
+                    // WebClient client1;
 
-                    foreach (var item in split)
-                    {
+                    //int flag = 1;
 
-                        if (item.Contains(".jpg"))
-                        {
-                            client1 = new WebClient();
-                            Uri uri = new Uri(path + item);
-                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
-                            flag++;
-                            Console.WriteLine(item);
-                        }
+                    //foreach (var item in split)
+                    //{
 
-                        if (item.Contains(".png"))
-                        {
-                            client1 = new WebClient();
-                            Uri uri = new Uri(path + item);
-                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.png");
-                            flag++;
-                            Console.WriteLine(item);
-                        }
+                    //    if (item.Contains(".jpg"))
+                    //    {
+                    //        client1 = new WebClient();
+                    //        Uri uri = new Uri(path + item);
+                    //        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
+                    //        flag++;
+                    //        Console.WriteLine(item);
+                    //    }
 
-                        if (item.Contains(".svg"))
-                        {
-                            client1 = new WebClient();
-                            Uri uri = new Uri(path + item);
-                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.svg");
-                            flag++;
-                            Console.WriteLine(item);
-                        }
-                    }
+                    //    if (item.Contains(".png"))
+                    //    {
+                    //        client1 = new WebClient();
+                    //        Uri uri = new Uri(path + item);
+                    //        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.png");
+                    //        flag++;
+                    //        Console.WriteLine(item);
+                    //    }
+
+                    //    if (item.Contains(".svg"))
+                    //    {
+                    //        client1 = new WebClient();
+                    //        Uri uri = new Uri(path + item);
+                    //        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.svg");
+                    //        flag++;
+                    //        Console.WriteLine(item);
+                    //    }
+                    //}
                 }
             }
             Console.ReadKey();
