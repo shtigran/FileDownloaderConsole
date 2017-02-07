@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -38,7 +39,7 @@ namespace FileDownloader
                     Console.WriteLine("-------------");
                    
                     string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
+                    Directory.CreateDirectory(dir + "\\Images");
                     WebClient client1;
 
                     int flag = 1;
@@ -48,9 +49,14 @@ namespace FileDownloader
 
                         if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg"))
                         {
+                            if (!Directory.Exists(dir + "\\Images"))
+                            Directory.CreateDirectory(dir + "\\Images");
                             client1 = new WebClient();
+
+
+
                             Uri uri = new Uri(path + item);
-                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
+                            client1.DownloadFileAsync(uri, $"{dir}\\Images\\Picture{flag}.jpg");
                             
                              flag++;
                             Console.WriteLine(item);
