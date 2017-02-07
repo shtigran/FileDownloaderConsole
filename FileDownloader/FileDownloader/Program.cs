@@ -39,21 +39,22 @@ namespace FileDownloader
                    
                     string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-                    // WebClient client1;
+                    WebClient client1;
 
-                    //int flag = 1;
+                    int flag = 1;
 
-                    //foreach (var item in split)
-                    //{
+                    foreach (var item in split)
+                    {
 
-                    //    if (item.Contains(".jpg"))
-                    //    {
-                    //        client1 = new WebClient();
-                    //        Uri uri = new Uri(path + item);
-                    //        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
-                    //        flag++;
-                    //        Console.WriteLine(item);
-                    //    }
+                        if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg"))
+                        {
+                            client1 = new WebClient();
+                            Uri uri = new Uri(path + item);
+                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
+                            
+                             flag++;
+                            Console.WriteLine(item);
+                       }
 
                     //    if (item.Contains(".png"))
                     //    {
@@ -72,7 +73,7 @@ namespace FileDownloader
                     //        flag++;
                     //        Console.WriteLine(item);
                     //    }
-                    //}
+                    }
                 }
             }
             Console.ReadKey();
