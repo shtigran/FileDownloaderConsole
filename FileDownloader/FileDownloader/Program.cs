@@ -38,6 +38,7 @@ namespace FileDownloader
                     Console.WriteLine("\nThere are the following files: ");
                     string[] split = all.Split(new Char[] { '\n' });
                     if (path == "https://mail.ru/") split[12] = split[11];
+
                     Console.WriteLine("-------------");
                    
                     string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
