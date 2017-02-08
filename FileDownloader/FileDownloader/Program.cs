@@ -32,7 +32,7 @@ namespace FileDownloader
             using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
             {
                 htmlCode = client.DownloadString(path);
-                all = showMatch(htmlCode, @"([/:.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png)");
+                all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png)");
 
                 Console.WriteLine("\n|------------------------------|");
                 Console.WriteLine("|There are the following files:| ");
@@ -57,8 +57,9 @@ namespace FileDownloader
                         uri = new Uri(path1);
                     }
 
-                    
 
+
+                    #region Pictures
                     if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg"))
                     {
                         if (!Directory.Exists(dir + "\\Images"))
@@ -85,9 +86,11 @@ namespace FileDownloader
                         }
 
                     }
+                    #endregion  
+
 
                 }
-                Console.WriteLine("There are {0} files in {1}", flag, path);
+                Console.WriteLine("\nThere are {0} files in {1}", flag, path);
             }
 
             Console.ReadKey();
