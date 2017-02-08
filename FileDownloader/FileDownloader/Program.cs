@@ -19,6 +19,7 @@ namespace FileDownloader
             Console.Write("\nPlease enter the Website path: ");
             string path = Console.ReadLine();
 
+
             // Checking URL validity          
             if (!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
             { throw new UriFormatException("Wrong URL!!!"); }
@@ -37,7 +38,7 @@ namespace FileDownloader
                 Console.WriteLine("|There are the following files:| ");
                 string[] split = all.Split(new Char[] { '\n' });
                 if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded                 
-                
+
 
                 Console.WriteLine("|------------------------------|\n");
 
@@ -53,7 +54,7 @@ namespace FileDownloader
                     if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
 
                     {
-                        path1 = "http:" + item;                        
+                        path1 = "http:" + item;
                         uri = new Uri(path1);
                     }
 
@@ -137,7 +138,7 @@ namespace FileDownloader
                                 flag++;
                                 Console.WriteLine($"File {flag}: {item}");
                                 client.DownloadFile(uri, $"{dir}\\Music\\Music{flag}.mp3");
-                            
+
                             }
                         }
                         catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
