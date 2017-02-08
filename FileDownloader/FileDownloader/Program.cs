@@ -32,12 +32,12 @@ namespace FileDownloader
             using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
             {
                 htmlCode = client.DownloadString(path);
-                all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png)");
+                all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|jpeg|gif)");
 
                 Console.WriteLine("\n|------------------------------|");
                 Console.WriteLine("|There are the following files:| ");
                 string[] split = all.Split(new Char[] { '\n' });
-                if (path == "https://mail.ru/") split[12] = split[11];
+                if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded 
 
                 Console.WriteLine("|------------------------------|\n");
 
@@ -60,31 +60,66 @@ namespace FileDownloader
 
 
                     #region Pictures
-                    if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg"))
+                    if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg") || item.Contains(".gif") || item.Contains(".jpeg"))
                     {
                         if (!Directory.Exists(dir + "\\Images"))
                             Directory.CreateDirectory(dir + "\\Images");
 
 
-                        if (item.Contains(".jpg"))
+                        try
                         {
-                            flag++;
-                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
-                            Console.WriteLine($"File {flag}: {item}");
+                            if (item.Contains(".jpg"))
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
+                            }
                         }
-                        if (item.Contains(".png"))
-                        {
-                            flag++;
-                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
-                            Console.WriteLine($"File {flag}: {item}");
-                        }
-                        if (item.Contains(".svg"))
-                        {
-                            flag++;
-                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
-                            Console.WriteLine($"File {flag}: {item}");
-                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!");}
 
+                        try
+                        {
+                            if (item.Contains(".png"))
+                        {
+                            flag++;
+                            Console.WriteLine($"File {flag}: {item}");
+                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
+                        }
+                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+                        try
+                        {
+                            if (item.Contains(".svg"))
+                        {
+                            flag++;
+                            Console.WriteLine($"File {flag}: {item}");
+                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
+                        }
+                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+                        try
+                        {
+                            if (item.Contains(".jpeg"))
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
+                            }
+                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+                        try
+                        {
+                            if (item.Contains(".gif"))
+                        {
+                            flag++;
+                            Console.WriteLine($"File {flag}: {item}");
+                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
+                        }
+                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
                     }
                     #endregion  
 
