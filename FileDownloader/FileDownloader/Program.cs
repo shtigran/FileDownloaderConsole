@@ -33,7 +33,6 @@ namespace FileDownloader
             {
                 htmlCode = client.DownloadString(path);
                 all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|jpeg|gif)");
-
                 Console.WriteLine("\n|------------------------------|");
                 Console.WriteLine("|There are the following files:| ");
                 string[] split = all.Split(new Char[] { '\n' });
@@ -50,7 +49,7 @@ namespace FileDownloader
                     path1 = path + item;
                     Uri uri = new Uri(path1);
 
-                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net"))
+                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") ||  item.Contains(".ge") ||  item.Contains(".am"))
 
                     {
                         path1 = "http:" + item;
