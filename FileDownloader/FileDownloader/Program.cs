@@ -16,7 +16,7 @@ namespace FileDownloader
 
             // Welcome message
             Console.WriteLine("\n ***|Welcome Website Files Downloader|***");
-            Console.Write("\n     Please enter the Website path: ");
+            Console.Write("\nPlease enter the Website path: ");
             string path = Console.ReadLine();
 
             // Checking URL validity          
@@ -49,10 +49,13 @@ namespace FileDownloader
                     path1 = path + item;
                     Uri uri = new Uri(path1);
 
-                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") ||  item.Contains(".ge") ||  item.Contains(".am"))
+                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am"))
 
                     {
-                        path1 = "http:" + item;
+                        if (path.Contains("http"))
+                            path1 = "https:" + item;
+                        if (path.Contains("https"))
+                            path1 = "https:" + item;
                         uri = new Uri(path1);
                     }
 
@@ -74,27 +77,27 @@ namespace FileDownloader
                                 client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
                             }
                         }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!");}
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
 
                         try
                         {
                             if (item.Contains(".png"))
-                        {
-                            flag++;
-                            Console.WriteLine($"File {flag}: {item}");
-                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
-                        }
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
+                            }
                         }
                         catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
 
                         try
                         {
                             if (item.Contains(".svg"))
-                        {
-                            flag++;
-                            Console.WriteLine($"File {flag}: {item}");
-                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
-                        }
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
+                            }
                         }
                         catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
 
@@ -112,11 +115,11 @@ namespace FileDownloader
                         try
                         {
                             if (item.Contains(".gif"))
-                        {
-                            flag++;
-                            Console.WriteLine($"File {flag}: {item}");
-                            client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
-                        }
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
+                            }
                         }
                         catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
                     }
