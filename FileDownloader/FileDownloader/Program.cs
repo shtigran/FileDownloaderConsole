@@ -21,10 +21,10 @@ namespace FileDownloader
 
             // Checking URL validity          
             if (!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
-            { Console.WriteLine("Wrong URL path!!!"); }
+                { throw new UriFormatException("Wrong URL!!!"); }
 
-            else
-            {   // Creating strings for operations
+
+              // Creating strings for operations
                 string all = string.Empty;
                 string htmlCode = string.Empty;
                 string path1 = string.Empty;
@@ -32,8 +32,9 @@ namespace FileDownloader
                 using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
                 {
                     htmlCode = client.DownloadString(path);
-                    all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png)");
-                    //Console.WriteLine("\n"+ all);
+                    all = showMatch(htmlCode, @"([/:.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png)");
+                 
+
                     Console.WriteLine("-------------");
                     Console.WriteLine("\nThere are the following files: ");
                     string[] split = all.Split(new Char[] { '\n' });
@@ -47,45 +48,43 @@ namespace FileDownloader
                     int flag = 0;
                     foreach (var item in split)
                     {
-                        WebClient client1;
-                        client1 = new WebClient();
-                        path1 = path + item;
-                        Uri uri = new Uri(path1);
-                        
-                        if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net"))
-
-                        {
-                            client1 = new WebClient();
-                            path1 = "http:" + item;
-                            uri = new Uri(path1);
-                        }
-
                         Console.WriteLine(item);
+                        //path1 = path + item;
+                        //Uri uri = new Uri(path1);
+                        
+                        //if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net"))
 
-                        if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg"))
-                        {
-                            if (!Directory.Exists(dir + "\\Images"))
-                                Directory.CreateDirectory(dir + "\\Images");
+                        //{
+                        //    path1 = "http:" + item;
+                        //    uri = new Uri(path1);
+                        //}
+
+                        //Console.WriteLine(item);
+
+                        //if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg"))
+                        //{
+                        //    if (!Directory.Exists(dir + "\\Images"))
+                        //        Directory.CreateDirectory(dir + "\\Images");
 
 
-                            if (item.Contains(".jpg"))
-                            {
-                                flag++;
-                                client1.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
+                        //    if (item.Contains(".jpg"))
+                        //    {
+                        //        flag++;
+                        //        client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
                                 
-                            }
-                            if (item.Contains(".png") )
-                            {
-                                flag++;
-                                client1.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
-                            }
-                            if (item.Contains(".svg"))
-                            {
-                                flag++;
-                                client1.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");                              
-                            }
+                        //    }
+                        //    if (item.Contains(".png") )
+                        //    {
+                        //        flag++;
+                        //        client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
+                        //    }
+                        //    if (item.Contains(".svg"))
+                        //    {
+                        //        flag++;
+                        //        client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");                              
+                        //    }
 
-                        }
+                        //}
 
                         // //    if (item.Contains(".svg"))
                         // //    { client1.DownloadFileAsync(uri, $"{dir}\\Images\\Picture{flag}.svg"); }
@@ -114,7 +113,7 @@ namespace FileDownloader
                     }
                     Console.WriteLine( "There are {0} files in {1}", flag, path);
                 }
-            }
+            
             Console.ReadKey();
         }
 
