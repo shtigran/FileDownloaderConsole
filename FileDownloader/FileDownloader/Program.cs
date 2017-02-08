@@ -32,11 +32,12 @@ namespace FileDownloader
             using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
             {
                 htmlCode = client.DownloadString(path);
-                all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|jpeg|gif)");
+                all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav)");
                 Console.WriteLine("\n|------------------------------|");
                 Console.WriteLine("|There are the following files:| ");
                 string[] split = all.Split(new Char[] { '\n' });
-                if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded 
+                if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded                 
+                
 
                 Console.WriteLine("|------------------------------|\n");
 
@@ -49,16 +50,12 @@ namespace FileDownloader
                     path1 = path + item;
                     Uri uri = new Uri(path1);
 
-                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am"))
+                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
 
                     {
-                        if (path.Contains("http"))
-                            path1 = "https:" + item;
-                        if (path.Contains("https"))
-                            path1 = "https:" + item;
+                        path1 = "http:" + item;                        
                         uri = new Uri(path1);
                     }
-
 
 
                     #region Pictures
@@ -107,6 +104,7 @@ namespace FileDownloader
                             {
                                 flag++;
                                 Console.WriteLine($"File {flag}: {item}");
+                                Console.WriteLine(path1);
                                 client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
                             }
                         }
@@ -124,6 +122,39 @@ namespace FileDownloader
                         catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
                     }
                     #endregion  
+
+                    #region Music
+                    if (item.Contains(".mp3") || item.Contains(".wav"))
+                    {
+                        if (!Directory.Exists(dir + "\\Music"))
+                            Directory.CreateDirectory(dir + "\\Music");
+
+
+                        try
+                        {
+                            if (item.Contains(".mp3"))
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Music\\Music{flag}.mp3");
+                            
+                            }
+                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+                        try
+                        {
+                            if (item.Contains(".wav"))
+                            {
+                                flag++;
+                                Console.WriteLine($"File {flag}: {item}");
+                                client.DownloadFile(uri, $"{dir}\\Images\\Music{flag}.wav");
+                            }
+                        }
+                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+                    }
+                    #endregion
 
 
                 }
