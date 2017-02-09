@@ -32,12 +32,9 @@ namespace FileDownloader
 
       using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
       {
+
         htmlCode = client.DownloadString(path);
-
         path = ForUrl(path);
-
-
-
         all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav)");
         Console.WriteLine("\n|------------------------------|");
         Console.WriteLine("|There are the following files:| ");
@@ -175,8 +172,7 @@ namespace FileDownloader
     {
       string[] list = path.Split('/');
       foreach (var item in list)
-      {
-        Console.WriteLine(item);
+      {     
         if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
           path = list[0] + "//" + item + '/';
       }
