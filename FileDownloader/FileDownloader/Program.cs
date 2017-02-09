@@ -32,16 +32,17 @@ namespace FileDownloader
 
       using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
       {
-
+         // Downoload the HTML code of URL
         htmlCode = client.DownloadString(path);
+        // Change the URL to root if it is suburl
         path = ForUrl(path);
+        // Regex matching to find all files text
         all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav)");
         Console.WriteLine("\n|------------------------------|");
         Console.WriteLine("|There are the following files:| ");
+        // Recieving the lines of each file
         string[] split = all.Split(new Char[] { '\n' });
         if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded                 
-
-
         Console.WriteLine("|------------------------------|\n");
 
         string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // For download direction
