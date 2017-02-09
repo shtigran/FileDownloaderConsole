@@ -9,171 +9,191 @@ using System.Threading.Tasks;
 
 namespace FileDownloader
 {
-    public static class Program
+  public static class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+
+      // Welcome message
+      Console.WriteLine("\n ***|Welcome Website Files Downloader|***");
+      Console.Write("\nPlease enter the Website path: ");
+      string path = Console.ReadLine();
+
+
+      // Checking URL validity          
+      if (!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
+      { throw new UriFormatException("Wrong URL!!!"); }
+
+
+      // Creating strings for operations
+      string all = string.Empty;
+      string htmlCode = string.Empty;
+      string path1 = string.Empty;
+
+      using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
+      {
+        htmlCode = client.DownloadString(path);
+
+        path = ForUrl(path);
+
+
+
+        all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav)");
+        Console.WriteLine("\n|------------------------------|");
+        Console.WriteLine("|There are the following files:| ");
+        string[] split = all.Split(new Char[] { '\n' });
+        if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded                 
+
+
+        Console.WriteLine("|------------------------------|\n");
+
+        string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // For download direction
+
+
+        int flag = 0;
+        foreach (var item in split)
         {
+          path1 = path + item;
+          Uri uri = new Uri(path1);
 
-            // Welcome message
-            Console.WriteLine("\n ***|Welcome Website Files Downloader|***");
-            Console.Write("\nPlease enter the Website path: ");
-            string path = Console.ReadLine();
+          if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
+
+          {
+            path1 = "http:" + item;
+            uri = new Uri(path1);
+          }
 
 
-            // Checking URL validity          
-            if (!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
-            { throw new UriFormatException("Wrong URL!!!"); }
+          #region Pictures
+          if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg") || item.Contains(".gif") || item.Contains(".jpeg"))
+          {
+            if (!Directory.Exists(dir + "\\Images"))
+              Directory.CreateDirectory(dir + "\\Images");
 
 
-            // Creating strings for operations
-            string all = string.Empty;
-            string htmlCode = string.Empty;
-            string path1 = string.Empty;
-
-            using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
+            try
             {
-                htmlCode = client.DownloadString(path);
-                all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav)");
-                Console.WriteLine("\n|------------------------------|");
-                Console.WriteLine("|There are the following files:| ");
-                string[] split = all.Split(new Char[] { '\n' });
-                if (path == "https://mail.ru/") split[17] = split[18]; // Bug finded                 
-
-
-                Console.WriteLine("|------------------------------|\n");
-
-                string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // For download direction
-
-
-                int flag = 0;
-                foreach (var item in split)
-                {
-                    path1 = path + item;
-                    Uri uri = new Uri(path1);
-
-                    if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
-
-                    {
-                        path1 = "http:" + item;
-                        uri = new Uri(path1);
-                    }
-
-
-                    #region Pictures
-                    if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg") || item.Contains(".gif") || item.Contains(".jpeg"))
-                    {
-                        if (!Directory.Exists(dir + "\\Images"))
-                            Directory.CreateDirectory(dir + "\\Images");
-
-
-                        try
-                        {
-                            if (item.Contains(".jpg"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-                        try
-                        {
-                            if (item.Contains(".png"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-                        try
-                        {
-                            if (item.Contains(".svg"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-                        try
-                        {
-                            if (item.Contains(".jpeg"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                Console.WriteLine(path1);
-                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-                        try
-                        {
-                            if (item.Contains(".gif"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-                    }
-                    #endregion  
-
-                    #region Music
-                    if (item.Contains(".mp3") || item.Contains(".wav"))
-                    {
-                        if (!Directory.Exists(dir + "\\Music"))
-                            Directory.CreateDirectory(dir + "\\Music");
-
-
-                        try
-                        {
-                            if (item.Contains(".mp3"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                client.DownloadFile(uri, $"{dir}\\Music\\Music{flag}.mp3");
-
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-                        try
-                        {
-                            if (item.Contains(".wav"))
-                            {
-                                flag++;
-                                Console.WriteLine($"File {flag}: {item}");
-                                client.DownloadFile(uri, $"{dir}\\Images\\Music{flag}.wav");
-                            }
-                        }
-                        catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-                    }
-                    #endregion
-
-
-                }
-                Console.WriteLine("\nThere are {0} files in {1}", flag, path);
+              if (item.Contains(".jpg"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
+              }
             }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
 
-            Console.ReadKey();
-        }
-
-        private static string showMatch(string text, string expr)
-        {
-            MatchCollection mc = Regex.Matches(text, expr);
-            string result = "";
-            foreach (Match m in mc)
+            try
             {
-                result += m.ToString() + "\n";
+              if (item.Contains(".png"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
+              }
             }
-            return result;
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".svg"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".jpeg"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                Console.WriteLine(path1);
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".gif"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+          }
+          #endregion
+
+          #region Music
+          if (item.Contains(".mp3") || item.Contains(".wav"))
+          {
+            if (!Directory.Exists(dir + "\\Music"))
+              Directory.CreateDirectory(dir + "\\Music");
+
+
+            try
+            {
+              if (item.Contains(".mp3"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Music\\Music{flag}.mp3");
+
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".wav"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Images\\Music{flag}.wav");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+          }
+          #endregion
+
+
         }
+        Console.WriteLine("\nThere are {0} files in {1}", flag, path);
+      }
+
+      Console.ReadKey();
     }
+
+    // Method For correct url if it is Suburl
+    private static string ForUrl(string path)
+    {
+      string[] list = path.Split('/');
+      foreach (var item in list)
+      {
+        Console.WriteLine(item);
+        if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
+          path = list[0] + "//" + item + '/';
+      }
+
+      return path;
+    }
+
+    // Method For Regex Matching
+    private static string showMatch(string text, string expr)
+    {
+      MatchCollection mc = Regex.Matches(text, expr);
+      string result = "";
+      foreach (Match m in mc)
+      {
+        result += m.ToString() + "\n";
+      }
+      return result;
+    }
+  }
 }
