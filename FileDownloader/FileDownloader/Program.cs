@@ -37,7 +37,7 @@ namespace FileDownloader
         // Change the URL to root if it is suburl
         path = ForUrl(path);
         // Regex matching to find all files text
-        all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav)");
+        all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf)");
         Console.WriteLine("\n|------------------------------|");
         Console.WriteLine("|There are the following files:| ");
         // Recieving the lines of each file
@@ -61,6 +61,70 @@ namespace FileDownloader
             uri = new Uri(path1);
           }
 
+          #region TextFiles
+          if (item.Contains(".txt") || item.Contains(".doc") || item.Contains(".docx") || item.Contains(".pdf "))
+          {
+            if (!Directory.Exists(dir + "\\TextFiles"))
+              Directory.CreateDirectory(dir + "\\TextFiles");
+
+
+            try
+            {
+              if (item.Contains(".txt"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFiles{flag}.txt");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".doc"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFiles{flag}.doc");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".docx"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFiles{flag}.docx");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".pdf"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                Console.WriteLine(path1);
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".gif"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+          }
+          #endregion
 
           #region Pictures
           if (item.Contains(".jpg") || item.Contains(".png") || item.Contains(".svg") || item.Contains(".gif") || item.Contains(".jpeg"))
@@ -100,19 +164,7 @@ namespace FileDownloader
                 client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
               }
             }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".jpeg"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                Console.WriteLine(path1);
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }            
 
             try
             {
