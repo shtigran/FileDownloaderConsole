@@ -57,13 +57,16 @@ namespace FileDownloader
 
 
 
-          path1 = path + item;
+          path1 = path + item;        
           Uri uri = new Uri(path1);
 
           if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
 
           {
-            path1 = "http:" + item;
+            if (path.Contains("http"))
+              path1 = "http:" + item;
+            if (path.Contains("https"))
+              path1 = "https:" + item;
             uri = new Uri(path1);
           }
 
