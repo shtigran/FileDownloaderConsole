@@ -81,7 +81,7 @@ namespace FileDownloader
 
             try
             {
-              if (item.Contains(".doc"))
+              if (item.Contains(".doc") && !item.Contains(".doc"))
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
