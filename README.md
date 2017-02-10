@@ -199,3 +199,11 @@ public static class Program
       Console.ReadKey();
     }
 ```
+----
+
+### Description of Program class
+The user input URL of Website. The program check if the URL is valid (with URI class). The download all html code of that website, after scanning of the files containing rows an return array of files names. The the program with the extension defins in which folder must be inputed files and download them to desktop. (short description, if You want more see code).
+
+
+
+----
