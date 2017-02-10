@@ -74,7 +74,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.txt");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\{item}{flag}.txt");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -85,7 +85,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.doc");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\{item}{flag}.doc");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -96,7 +96,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.docx");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\{item}{flag}.docx");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -108,7 +108,7 @@ namespace FileDownloader
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
                 Console.WriteLine(path1);
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.pdf");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\{item}{flag}.pdf");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -129,7 +129,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.jpg");
+                client.DownloadFile(uri, $"{dir}\\Images\\{item}{flag}.jpg");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -140,7 +140,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.png");
+                client.DownloadFile(uri, $"{dir}\\Images\\{item}{flag}.png");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -151,7 +151,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.svg");
+                client.DownloadFile(uri, $"{dir}\\Images\\{item}{flag}.svg");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }            
@@ -162,7 +162,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.gif");
+                client.DownloadFile(uri, $"{dir}\\Images\\{item}{flag}.gif");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -182,7 +182,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Music\\item{flag}.mp3");
+                client.DownloadFile(uri, $"{dir}\\Music\\{item}{flag}.mp3");
 
               }
             }
@@ -194,7 +194,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.wav");
+                client.DownloadFile(uri, $"{dir}\\Images\\{item}{flag}.wav");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
