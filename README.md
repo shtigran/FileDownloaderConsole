@@ -207,3 +207,34 @@ The user input URL of Website. The program check if the URL is valid (with URI c
 
 
 ----
+
+
+### ForUrl and showMatch methods implementation 
+
+```C#
+// Method For correct url if it is Suburl
+    private static string ForUrl(string path)
+    {
+      string[] list = path.Split('/');
+      foreach (var item in list)
+      {
+        if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
+          path = list[0] + "//" + item + '/';
+      }
+
+      return path;
+    }
+
+    // Method For Regex Matching
+    private static string showMatch(string text, string expr)
+    {
+      MatchCollection mc = Regex.Matches(text, expr);
+      string result = "";
+      foreach (Match m in mc)
+      {
+        result += m.ToString() + "\n";
+      }
+      return result;
+    }
+  }
+```
