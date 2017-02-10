@@ -49,7 +49,13 @@ namespace FileDownloader
         string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); // For download direction
 
 
-        int flag = 0;
+        int count = 0;
+        int countText = 0;
+        int countPictures = 0;
+        int countMusic = 0;
+        int countVideos = 0;
+        int countArchives = 0;
+
         foreach (var item in split)
         {
           string[] split1 = item.Split(new Char[] { '/' });
@@ -78,9 +84,10 @@ namespace FileDownloader
 
             try
             {
-              flag++;
-              Console.WriteLine($"File {flag}: {item}");
-              client.DownloadFile(uri, $"{dir}\\TextFiles\\{flag}_{filename}");
+              countText++;
+              count++;
+              Console.WriteLine($"File {count}: {item}");
+              client.DownloadFile(uri, $"{dir}\\TextFiles\\{countText}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
           }
@@ -95,9 +102,10 @@ namespace FileDownloader
 
             try
             {
-              flag++;
-              Console.WriteLine($"File {flag}: {item}");
-              client.DownloadFile(uri, $"{dir}\\Images\\{flag}_{filename}");
+              countPictures++;
+              count++;
+              Console.WriteLine($"File {count}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Images\\{countPictures}_{filename}");
 
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -112,9 +120,10 @@ namespace FileDownloader
 
             try
             {
-              flag++;
-              Console.WriteLine($"File {flag}: {item}");
-              client.DownloadFile(uri, $"{dir}\\Music\\{flag}_{filename}");
+              countMusic++;
+              count++;
+              Console.WriteLine($"File {count}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Music\\{countMusic}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
           }
@@ -130,9 +139,10 @@ namespace FileDownloader
 
             try
             {
-              flag++;
-              Console.WriteLine($"File {flag}: {item}");
-              client.DownloadFile(uri, $"{dir}\\Videos\\{flag}_{filename}");
+              countVideos++;
+              count++;
+              Console.WriteLine($"File {count}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Videos\\{countVideos}_{filename}");
 
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -141,7 +151,7 @@ namespace FileDownloader
           #endregion
 
         }
-        Console.WriteLine("\nThere are {0} files in {1}", flag, path);
+        Console.WriteLine("\nThere are {0} files in {1}", count, path);
       }
 
       Console.ReadKey();
