@@ -33,7 +33,7 @@ namespace FileDownloader
 
       using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
       {
-         // Downoload the HTML code of URL
+        // Downoload the HTML code of URL
         htmlCode = client.DownloadString(path);
         // Change the URL to root if it is suburl
         path = ForUrl(path);
@@ -54,7 +54,7 @@ namespace FileDownloader
         {
           string[] split1 = item.Split(new Char[] { '/' });
           filename = split1[split1.Length - 1];
-          Console.WriteLine(filename);
+
 
 
           path1 = path + item;
@@ -73,53 +73,15 @@ namespace FileDownloader
             if (!Directory.Exists(dir + "\\TextFiles"))
               Directory.CreateDirectory(dir + "\\TextFiles");
 
-
             try
             {
-              if (item.Contains(".txt"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFile{flag}.txt");
-              }
+              flag++;
+              Console.WriteLine($"File {flag}: {item}");
+              client.DownloadFile(uri, $"{dir}\\TextFiles\\{flag}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".doc") && !item.Contains(".docx"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFile{flag}.doc");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".docx"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFile{flag}.docx");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".pdf"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                Console.WriteLine(path1);
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFile{flag}.pdf");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
           }
+
           #endregion
 
           #region Pictures
@@ -128,48 +90,12 @@ namespace FileDownloader
             if (!Directory.Exists(dir + "\\Images"))
               Directory.CreateDirectory(dir + "\\Images");
 
-
             try
             {
-              if (item.Contains(".jpg"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\picture{flag}.jpg");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+              flag++;
+              Console.WriteLine($"File {flag}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Images\\{flag}_{filename}");
 
-            try
-            {
-              if (item.Contains(".png"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\picture{flag}.png");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".svg"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\picture{flag}.svg");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }            
-
-            try
-            {
-              if (item.Contains(".gif"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\picture{flag}.gif");
-              }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
           }
@@ -181,31 +107,15 @@ namespace FileDownloader
             if (!Directory.Exists(dir + "\\Music"))
               Directory.CreateDirectory(dir + "\\Music");
 
-
             try
             {
-              if (item.Contains(".mp3"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Music\\music{flag}.mp3");
-
-              }
+              flag++;
+              Console.WriteLine($"File {flag}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Music\\{flag}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".wav"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\music{flag}.wav");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
           }
+
           #endregion
 
           #region Videos
@@ -217,64 +127,15 @@ namespace FileDownloader
 
             try
             {
-              if (item.Contains(".3gp"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.3gp");
-              }
+              flag++;
+              Console.WriteLine($"File {flag}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Videos\\{flag}_{filename}");
+
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".avi"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.avi");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".mp4"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.mp4");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".flv"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.flv");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-            try
-            {
-              if (item.Contains(".mov"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.mov");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
-
-
-
           }
-          #endregion
 
+          #endregion
 
         }
         Console.WriteLine("\nThere are {0} files in {1}", flag, path);
@@ -288,7 +149,7 @@ namespace FileDownloader
     {
       string[] list = path.Split('/');
       foreach (var item in list)
-      {     
+      {
         if (item.Contains(".com") || item.Contains(".ru") || item.Contains(".net") || item.Contains(".ge") || item.Contains(".am") || item.Contains(".fm"))
           path = list[0] + "//" + item + '/';
       }
