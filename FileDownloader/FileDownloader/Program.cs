@@ -38,7 +38,7 @@ namespace FileDownloader
         // Change the URL to root if it is suburl
         path = ForUrl(path);
         // Regex matching to find all files text
-        all = showMatch(htmlCode, @"([/.%@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf|3gp|avi|mp4|flv|mov)");
+        all = showMatch(htmlCode, @"([/.%@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf|3gp|avi|mp4|flv|mov|rar|iso)");
         Console.WriteLine("\n|------------------------------|");
         Console.WriteLine("|There are the following files:| ");
         // Recieving the lines of each file
@@ -144,6 +144,24 @@ namespace FileDownloader
               Console.WriteLine($"File {count}: {item}");
               client.DownloadFile(uri, $"{dir}\\Videos\\{countVideos}_{filename}");
 
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+          }
+
+          #endregion
+
+          #region Archives
+          if (item.Contains(".rar") || item.Contains(".iso"))
+          {
+            if (!Directory.Exists(dir + "\\Archives"))
+              Directory.CreateDirectory(dir + "\\Archives");
+
+            try
+            {
+              countArchives++;
+              count++;
+              Console.WriteLine($"File {count}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Archives\\{countArchives}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
           }
