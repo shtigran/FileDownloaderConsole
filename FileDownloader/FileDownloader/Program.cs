@@ -37,7 +37,7 @@ namespace FileDownloader
         // Change the URL to root if it is suburl
         path = ForUrl(path);
         // Regex matching to find all files text
-        all = showMatch(htmlCode, @"([/.@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf)");
+        all = showMatch(htmlCode, @"([/.%@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf)");
         Console.WriteLine("\n|------------------------------|");
         Console.WriteLine("|There are the following files:| ");
         // Recieving the lines of each file
@@ -74,7 +74,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFiles{flag}.txt");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.txt");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -85,7 +85,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFiles{flag}.doc");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.doc");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -96,7 +96,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\TextFiles\\TextFiles{flag}.docx");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.docx");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -108,21 +108,11 @@ namespace FileDownloader
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
                 Console.WriteLine(path1);
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpeg");
+                client.DownloadFile(uri, $"{dir}\\TextFiles\\item{flag}.pdf");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
 
-            try
-            {
-              if (item.Contains(".gif"))
-              {
-                flag++;
-                Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
-              }
-            }
-            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
           }
           #endregion
 
@@ -139,7 +129,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.jpg");
+                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.jpg");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -150,7 +140,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.png");
+                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.png");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -161,7 +151,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.svg");
+                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.svg");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }            
@@ -172,7 +162,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\Picture{flag}.gif");
+                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.gif");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -192,7 +182,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Music\\Music{flag}.mp3");
+                client.DownloadFile(uri, $"{dir}\\Music\\item{flag}.mp3");
 
               }
             }
@@ -204,7 +194,7 @@ namespace FileDownloader
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
-                client.DownloadFile(uri, $"{dir}\\Images\\Music{flag}.wav");
+                client.DownloadFile(uri, $"{dir}\\Images\\item{flag}.wav");
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
