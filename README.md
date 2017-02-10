@@ -12,10 +12,13 @@ This program allow You only with URl of website Download already all types files
 
 ----
 
-### ReplaceArm class implementation
+### Program class implementation
 
 ```c#
-
+public static class Program
+  {
+    static void Main(string[] args)
+    {
  // Welcome message
       Console.WriteLine("\n ***|Welcome Website Files Downloader|***");
       Console.Write("\nPlease enter the Website path: ");
