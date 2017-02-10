@@ -29,6 +29,7 @@ namespace FileDownloader
       string all = string.Empty;
       string htmlCode = string.Empty;
       string path1 = string.Empty;
+      string filename = string.Empty;
 
       using (WebClient client = new WebClient()) // WebClient class inherits IDisposable 
       {
@@ -37,7 +38,7 @@ namespace FileDownloader
         // Change the URL to root if it is suburl
         path = ForUrl(path);
         // Regex matching to find all files text
-        all = showMatch(htmlCode, @"([/.%@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf)");
+        all = showMatch(htmlCode, @"([/.%@_a-zA-Z0-9\-]+?)\.(jpg|svg|png|gif|mp3|wav|txt|doc|docx|pdf|3gp|avi|mp4|flv|mov)");
         Console.WriteLine("\n|------------------------------|");
         Console.WriteLine("|There are the following files:| ");
         // Recieving the lines of each file
@@ -51,6 +52,11 @@ namespace FileDownloader
         int flag = 0;
         foreach (var item in split)
         {
+          string[] split1 = item.Split(new Char[] { '/' });
+          filename = split1[split1.Length - 1];
+          Console.WriteLine(filename);
+
+
           path1 = path + item;
           Uri uri = new Uri(path1);
 
@@ -81,7 +87,7 @@ namespace FileDownloader
 
             try
             {
-              if (item.Contains(".doc") && !item.Contains(".doc"))
+              if (item.Contains(".doc") && !item.Contains(".docx"))
               {
                 flag++;
                 Console.WriteLine($"File {flag}: {item}");
@@ -198,6 +204,73 @@ namespace FileDownloader
               }
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+          }
+          #endregion
+
+          #region Videos
+          if (item.Contains(".3gp") || item.Contains(".avi") || item.Contains(".mp4") || item.Contains(".flv") || item.Contains(".mov"))
+          {
+            if (!Directory.Exists(dir + "\\Videos"))
+              Directory.CreateDirectory(dir + "\\Videos");
+
+
+            try
+            {
+              if (item.Contains(".3gp"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.3gp");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".avi"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.avi");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".mp4"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.mp4");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".flv"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.flv");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+            try
+            {
+              if (item.Contains(".mov"))
+              {
+                flag++;
+                Console.WriteLine($"File {flag}: {item}");
+                client.DownloadFile(uri, $"{dir}\\Videos\\Video{flag}.mov");
+              }
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+
+
 
           }
           #endregion
