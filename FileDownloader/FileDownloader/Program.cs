@@ -87,7 +87,7 @@ namespace FileDownloader
             {
               countText++;
               count++;
-              Console.WriteLine($"File {count}: {item}");
+              Console.WriteLine($"TextFile {countText}: {item}");
               client.DownloadFile(uri, $"{dir}\\TextFiles\\{countText}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -105,7 +105,7 @@ namespace FileDownloader
             {
               countPictures++;
               count++;
-              Console.WriteLine($"File {count}: {item}");
+              Console.WriteLine($"Picture {countPictures}: {item}");
               client.DownloadFile(uri, $"{dir}\\Images\\{countPictures}_{filename}");
 
             }
@@ -123,7 +123,7 @@ namespace FileDownloader
             {
               countMusic++;
               count++;
-              Console.WriteLine($"File {count}: {item}");
+              Console.WriteLine($"MusicFile {countMusic}: {item}");
               client.DownloadFile(uri, $"{dir}\\Music\\{countMusic}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -142,7 +142,7 @@ namespace FileDownloader
             {
               countVideos++;
               count++;
-              Console.WriteLine($"File {count}: {item}");
+              Console.WriteLine($"VideoFIle {countVideos}: {item}");
               client.DownloadFile(uri, $"{dir}\\Videos\\{countVideos}_{filename}");
 
             }
@@ -161,7 +161,7 @@ namespace FileDownloader
             {
               countArchives++;
               count++;
-              Console.WriteLine($"File {count}: {item}");
+              Console.WriteLine($"ArchiveFile {countArchives}: {item}");
               client.DownloadFile(uri, $"{dir}\\Archives\\{countArchives}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
@@ -179,7 +179,7 @@ namespace FileDownloader
             {
               countPrograms++;
               count++;
-              Console.WriteLine($"File {count}: {item}");
+              Console.WriteLine($"ProgramFile {countPrograms}: {item}");
               client.DownloadFile(uri, $"{dir}\\Programs\\{countPrograms}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
