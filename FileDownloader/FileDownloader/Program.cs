@@ -55,6 +55,7 @@ namespace FileDownloader
         int countMusic = 0;
         int countVideos = 0;
         int countArchives = 0;
+        int countPrograms = 0;
 
         foreach (var item in split)
         {
@@ -151,7 +152,7 @@ namespace FileDownloader
           #endregion
 
           #region Archives
-          if (item.Contains(".rar") || item.Contains(".iso") || item.Contains(".exe"))
+          if (item.Contains(".rar") || item.Contains(".iso"))
           {
             if (!Directory.Exists(dir + "\\Archives"))
               Directory.CreateDirectory(dir + "\\Archives");
@@ -162,6 +163,24 @@ namespace FileDownloader
               count++;
               Console.WriteLine($"File {count}: {item}");
               client.DownloadFile(uri, $"{dir}\\Archives\\{countArchives}_{filename}");
+            }
+            catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
+          }
+
+          #endregion
+
+          #region Programs
+          if (item.Contains(".exe"))
+          {
+            if (!Directory.Exists(dir + "\\Programs"))
+              Directory.CreateDirectory(dir + "\\Programs");
+
+            try
+            {
+              countPrograms++;
+              count++;
+              Console.WriteLine($"File {count}: {item}");
+              client.DownloadFile(uri, $"{dir}\\Programs\\{countPrograms}_{filename}");
             }
             catch (FileNotFoundException) { Console.WriteLine("This file not found!"); }
           }
