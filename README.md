@@ -209,7 +209,7 @@ The user input URL of Website. The program check if the URL is valid (with URI c
 ----
 
 
-### ForUrl and showMatch methods implementation 
+### ForUrl and showMatch methods implementationa 
 
 ```C#
 // Method For correct url if it is Suburl
@@ -238,3 +238,6 @@ The user input URL of Website. The program check if the URL is valid (with URI c
     }
   }
 ```
+
+### ForUrl and showMatch methods descriptions 
+ForUrl Method For correct url if it is Suburl. ShowMatch Method For Regex Matching.
