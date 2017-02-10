@@ -240,4 +240,4 @@ The user input URL of Website. The program check if the URL is valid (with URI c
 ```
 
 ### ForUrl and showMatch methods descriptions 
-ForUrl Method For correct url if it is Suburl. ShowMatch Method For Regex Matching.
+ForUrl Method For correct url if it is Suburl. In ordr to program will be able to download it must define the general URL in which saved the files. And after that FileDownloader can download the files.  ShowMatch Method For Regex Matching.
