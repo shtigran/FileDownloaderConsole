@@ -204,9 +204,7 @@ public static class Program
 ----
 
 ### Description of Program class
-The user input URL of Website. The program check if the URL is valid (with URI class). The download all html code of that website, after scanning of the files containing rows an return array of files names. The the program with the extension defins in which folder must be inputed files and download them to desktop. (short description, if You want more see code).
-
-
+The user input URL of Website (path). The program check if the URL path is valid (with URI class). Then program download all html code of that website, after scanning of the files containing rows an return array of files names. The program with the extension defins in which folder must be inputed files and download them to desktop. (This is short description, if You want more see code).
 
 ----
 
