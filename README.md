@@ -240,4 +240,4 @@ The user input URL of Website (path). The program check if the URL path is valid
 ```
 
 ### ForUrl and showMatch methods descriptions 
-ForUrl Method For correct url if it is Suburl. In ordr to program will be able to download it must define the general URL in which saved the files. And after that FileDownloader can download the files.  ShowMatch Method For Regex Matching. The purpose of this method is to define file containing row in all HTML code. The methode takes tru argumnets, the first is a HTML code and the second is Regex expresion. In the end this method return summary string of files.
+ForUrl Method For corrects url if it is Suburl. In order to program will be able to download it must define the general URL in which saved the files. And after that FileDownloader can download the files.  ShowMatch Method For Regex Matching. The purpose of this method is to define file containing row in all HTML code. The methode takes two argumnets, the first is a HTML code and the second is Regex expresion. In the end this method return summary string of files.
